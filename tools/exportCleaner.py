@@ -74,8 +74,9 @@ def flagBlackWords(blackList, formattedData, outputFilePath):
     for item in formattedData:
         item['flaggedWords'] = []
         for word in blackList:
-            if word in item['Quote'].split(' '):
-                item['flaggedWords'].append(word)
+            quoteWords = [x.lower() for x in item['Quote'].split(' ')]
+            if word in quoteWords:
+                item['flaggedWords'].append(word.title())
         if len(item['flaggedWords']) > 0:
             item['Severity Score'] = len(item['flaggedWords'])
             flaggedQuotes.append(item)
